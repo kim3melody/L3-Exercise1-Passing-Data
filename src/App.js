@@ -58,7 +58,7 @@ const users = {
     userName: 'user123',
   },
   4: {
-    id: 3,
+    id: 4,
     name: 'John Doe',
     userName: 'user123',
   },
@@ -106,9 +106,32 @@ class App extends Component {
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
         <h2>Favorite Movies</h2>
+        <FMovies users={users} profiles={profiles} movies={movies}/>
       </div>
     );
   }
 }
 
 export default App;
+
+class FMovies extends Component {
+	render() {
+      const users = Object.values(this.props.users)
+      
+       console.log('props', movies)
+       console.log('props', users)
+    	return (
+       <ol className='t-list'>
+        {users.map(user => (
+          <li key={user.id}>
+          {`${user.name}'s favorite movie is ${
+          	this.props.movies[
+          		this.props.profiles.filter(profile => profile.userID == user.id)[0].favoriteMovieID.toString()
+          ].name
+          }.`}
+          </li>
+        ))}
+       </ol>
+        )
+    }
+}
